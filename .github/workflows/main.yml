@@ -1,4 +1,4 @@
-name: WordPress Deploy
+name: Deploy to EC2
 
 on:
   push:
@@ -11,23 +11,23 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
-      - name: Copy files to EC2
+      - name: Copy code to server
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "/opt/WordpressProject"  #Path of Repository files on Ec2 Server
-          target: "/var/www/html"  # Remote directory
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          source: "/root"
+          target: "/var/www/html/wordpress"
 
-      - name: SSH into EC2 and restart services
+      - name: SSH into the server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
-            sudo systemctl restart nginx
-            sudo systemctl restart php7.4-fpm
+            sudo systemctl reload nginx
+            sudo service php7.4-fpm restart
