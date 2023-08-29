@@ -1,25 +1,24 @@
-name: Deploy to EC2
+name: Deploy WordPress
 
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
 
+    - name: Set up SSH key
+      run: echo "$SSH_PRIVATE_KEY" > deploy_key && chmod 600 deploy_key
 
-      - name: SSH into the server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            sudo systemctl reload nginx
-            sudo service php7.4-fpm restart
+    - name: Deploy WordPress
+      run: |
+        chmod +x deploy.sh
+        ./deploy.sh
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
