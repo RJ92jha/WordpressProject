@@ -61,8 +61,8 @@ This repository contains scripts and configuration files to automate the deploym
 
 10. **Access Your Website**
 
-    - Visit your domain name using a web browser. You should see your WordPress website served securely over HTTPS.
-
+    - Visit th Wordpress website using domain https://hostmywp.ddnsking.com/ which is having SSL/TLS certificate with https access.
+      
 ## Maintenance
 
 - Regularly update your server, Nginx, PHP, and WordPress for security and performance improvements.
@@ -70,6 +70,6 @@ This repository contains scripts and configuration files to automate the deploym
 
 ## Troubleshooting
 
-- If you encounter issues, check the Nginx error logs: `sudo tail -f /var/log/nginx/error.log`.
+- If encounter any issues, We can check the Nginx error logs: `sudo tail -f /var/log/nginx/error.log`.
 
 
