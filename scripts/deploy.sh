@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define your server details
-SERVER_IP="65.2.178.159"
+SERVER_IP="65.0.102.31"
 SSH_USER="root"
 SSH_KEY_PRIVATE="-----BEGIN OPENSSH PRIVATE KEY-----
 b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABlwAAAAdzc2gtcn
@@ -47,10 +47,10 @@ WEBSITE_DIR="/var/www/html/wordpress"
 
 # Update the website code on the server
 echo "Deploying website code..."
-ssh -i "$SSH_KEY_PRIVATE" "$root@$65.2.178.159" "cd $WEBSITE_DIR"
+ssh -i "$SSH_KEY_PRIVATE" "$root@$65.0.102.31" "cd $WEBSITE_DIR"
 
 # Restart Nginx to apply changes
 echo "Restarting Nginx..."
-ssh -i "$SSH_KEY_PRIVATE" "$root@65.2.178.159" "sudo service nginx restart"
+ssh -i "$SSH_KEY_PRIVATE" "$root@65.0.102.31" "sudo service nginx restart"
 
 echo "Deployment complete."
